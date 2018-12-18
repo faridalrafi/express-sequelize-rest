@@ -32,8 +32,19 @@ router.post('/:user_id/tasks/create', function (req, res) {
     title: req.body.title,
     UserId: req.params.user_id
   }).then(function() {
-    res.redirect('/');
+    res.redirect('/users');
   });
+});
+
+
+router.delete('/:user_id/tasks/:task_id/destroy', function (req, res) {
+  models.Task.destroy({
+    where: {
+      id: req.params.task_id
+    }}).then(function() {
+    res.redirect('/users');
+  });
+
 });
 
 module.exports = router;
